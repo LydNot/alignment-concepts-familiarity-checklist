@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alignment Concepts Familiarity Checklist</title>
+  <style>
+    :root {
+      --bg: #f1ead4;
+      --paper: #f7f0dc;
+      --ink: #1f1f1f;
+      --muted: #5a584f;
+      --line: #8f8562;
+      --accent: #7c1f1f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at 20px 20px, rgba(120, 104, 62, 0.08) 0 18px, transparent 18px 100%),
+        radial-gradient(circle at 80px 80px, rgba(120, 104, 62, 0.08) 0 18px, transparent 18px 100%),
+        var(--bg);
+      background-size: 120px 120px;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.35;
+    }
+    .wrap {
+      max-width: 920px;
+      margin: 28px auto 48px;
+      padding: 0 16px;
+    }
+    h1 {
+      text-align: center;
+      font-size: clamp(32px, 5vw, 54px);
+      margin: 0;
+      letter-spacing: 0.5px;
+      border-top: 2px solid var(--line);
+      border-bottom: 2px solid var(--line);
+      padding: 6px 0;
+    }
+    .sub {
+      text-align: center;
+      font-style: italic;
+      color: var(--muted);
+      max-width: 760px;
+      margin: 14px auto 6px;
+    }
+    .warn {
+      text-align: center;
+      font-weight: 700;
+      margin: 10px 0 18px;
+    }
+    .intro {
+      text-align: center;
+      margin: 0 0 18px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.25);
+      padding: 12px;
+      margin-bottom: 18px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+    .score {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-right: 8px;
+    }
+    button {
+      background: #f8f3e4;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 6px 10px;
+      font: inherit;
+      cursor: pointer;
+    }
+    button:hover { background: #fff9eb; }
+    .copied {
+      color: var(--accent);
+      font-weight: 700;
+      min-height: 1.2em;
+      text-align: center;
+      margin-top: 8px;
+    }
+    ol {
+      margin: 0;
+      padding-left: 28px;
+    }
+    li {
+      margin: 4px 0;
+      padding-left: 4px;
+    }
+    label {
+      cursor: pointer;
+      user-select: none;
+    }
+    input[type="checkbox"] {
+      transform: translateY(1px);
+      margin-right: 6px;
+    }
+    .footer {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+    @media (max-width: 640px) {
+      .wrap { margin-top: 18px; }
+      ol { padding-left: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Alignment Concepts Familiarity Checklist</h1>
+    <p class="sub">
+      Faithful list of literature, concepts, and discourse markers.
+      Tick every item you know.
+    </p>
+    <p class="warn">For self-checking only. Not a bucket list.</p>
+    <p class="intro">
+      Known count: <strong># checked</strong>.
+    </p>
+
+    <section class="panel">
+      <div class="controls">
+        <div class="score">Known: <span id="score">0</span></div>
+        <div>Checked: <span id="checkedCount">0</span> / <span id="totalCount">0</span></div>
+        <button id="copyBtn" type="button">Copy Results</button>
+        <button id="clearBtn" type="button">Clear All</button>
+      </div>
+      <div class="copied" id="copiedMsg"></div>
+    </section>
+
+    <section class="panel">
+      <p><strong>Tick concepts you know:</strong></p>
+      <ol id="questions"></ol>
+    </section>
+
+    <p class="footer">
+      Built in the spirit of the Rationalist Purity Test format.
+    </p>
+  </main>
+
+  <script>
+    const items = [
+      "Bostrom / Superintelligence",
+      "Drexler's Comprehensive AI Services",
+      "many different posts by Critch",
+      "Prospecting for Gold by Owen Cotton-Barratt",
+      "all the classical essays by Scott",
+      "Permutation City by Egan",
+      "Fiasco by Lem",
+      "various posts by Paul Christiano",
+      "being part of the debate (mental bucket more like people)",
+      "heard the idea first and it was published later",
+      "Expected value",
+      "Comparative advantage",
+      "Tragedy of the commons",
+      "Arbitrage",
+      "Diminishing returns",
+      "Observation selection effect",
+      "Anthropic principle",
+      "Superforecasting",
+      "Nash equilibria",
+      "Evolutionary stable strategy",
+      "Optimiser's curse",
+      "Timeless/updateless decision theory",
+      "Bayes' theorem",
+      "Unilateralist's curse",
+      "Population ethics",
+      "Astronomical waste",
+      "X-risk vs. GCR vs. s-risk",
+      "Moral uncertainty",
+      "Moral trade",
+      "Moral (anti-)realism",
+      "Differential technological development",
+      "Goodhart's law",
+      "Local minima",
+      "Gradient descent",
+      "Simmulated annealing",
+      "Uncanny valley",
+      "Regression to the mean",
+      "System1 / System2",
+      "Trivial inconveniences",
+      "Mind projection fallacy",
+      "Signalling/ countersignalling",
+      "Aumann's agreement theorem",
+      "Bikeshedding",
+      "Moral licensing",
+      "Chesterton's fence",
+      "Risk homeostasis",
+      "Deterministic chaos",
+      "Lyapunov exponent",
+      "Ingroup and outgroup",
+      "Toxoplasma of rage",
+      "Pareto improvement / optimality",
+      "Incentive landscape",
+      "Conceptual metaphor",
+      "Halo effect",
+      "Neurodiversity (typical mind fallacy)",
+      "Bottleneck (Theory of Constraints)",
+      "Phase transition",
+      "Bifurcation",
+      "Attractor states",
+      "Symmetry breaking",
+      "Frictional costs",
+      "Information asymmetry",
+      "Information value",
+      "Principal agent problem",
+      "Stated and revealed preference",
+      "Ontological crisis",
+      "Fully general counterargument",
+      "Moloch",
+      "Precommitment",
+      "Breadth vs depth first search",
+      "Graphs: Degree",
+      "Directed graph",
+      "Weighted edges",
+      "Over/underdetermined",
+      "Arrow's impossibility theorem",
+      "Median voter theorem",
+      "Overton window",
+      "Public choice theory",
+      "Dimensionality reduction",
+      "Terminal and instrumental goals",
+      "Satisficing / quantilizer",
+      "Forward chaining / backward chaining",
+      "Markov process",
+      "Monte Carlo tree search",
+      "Propositional/1st order/Higher order logic",
+      "Exploration/exploitation tradeoff",
+      "Conditional probability (distribution)",
+      "Diffusion",
+      "Osmosis",
+      "Kolmogorov complexity",
+      "Computational complexity (P, NP, ...)",
+      "Predictive coding",
+      "Scale invariance/Universality class",
+      "Endogenous growth theory",
+      "Nash bargaining solution",
+      "Threat point",
+      "Value of time",
+      "Defensibility",
+      "Offence/defence balance",
+      "Pascal's mugging",
+      "MAD (mutually assured destruction)",
+      "KL-divergence",
+      "Convergence (evolutionary sense)",
+      "Contingency (evo)",
+      "Major evolutionary transitions",
+      "Social hystersis curves",
+      "all main things from predictive processing",
+      "Jaggedness",
+      "all main things from LLM psychology"
+    ];
+
+    const STORAGE_KEY = "alignment_purity_test_v1";
+    const questionsEl = document.getElementById("questions");
+    const scoreEl = document.getElementById("score");
+    const checkedEl = document.getElementById("checkedCount");
+    const totalEl = document.getElementById("totalCount");
+    const copyBtn = document.getElementById("copyBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const copiedMsg = document.getElementById("copiedMsg");
+
+    totalEl.textContent = String(items.length);
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (_) {
+        return [];
+      }
+    }
+
+    function saveState(state) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function buildList() {
+      const checkedState = loadState();
+      const fragment = document.createDocumentFragment();
+
+      items.forEach((text, idx) => {
+        const li = document.createElement("li");
+        const label = document.createElement("label");
+        const box = document.createElement("input");
+        box.type = "checkbox";
+        box.dataset.index = String(idx);
+        box.checked = Boolean(checkedState[idx]);
+        box.addEventListener("change", onToggle);
+        label.appendChild(box);
+        label.appendChild(document.createTextNode(text));
+        li.appendChild(label);
+        fragment.appendChild(li);
+      });
+
+      questionsEl.appendChild(fragment);
+      updateScore();
+    }
+
+    function getStateFromDom() {
+      return Array.from(questionsEl.querySelectorAll("input[type=checkbox]")).map((b) => b.checked);
+    }
+
+    function updateScore() {
+      const state = getStateFromDom();
+      const checked = state.filter(Boolean).length;
+      checkedEl.textContent = String(checked);
+      scoreEl.textContent = String(checked);
+      saveState(state);
+    }
+
+    function onToggle() {
+      copiedMsg.textContent = "";
+      updateScore();
+    }
+
+    function renderShareText() {
+      const state = getStateFromDom();
+      const checked = state.filter(Boolean).length;
+      const score = checked;
+      const doneItems = items
+        .map((item, i) => (state[i] ? `${i + 1}. ${item}` : null))
+        .filter(Boolean);
+
+      return [
+        "Alignment Concepts Familiarity Checklist",
+        `Known: ${score} (${checked}/${items.length} checked)`,
+        "",
+        "Checked items:",
+        doneItems.length ? doneItems.join("\n") : "(none yet)"
+      ].join("\n");
+    }
+
+    copyBtn.addEventListener("click", async () => {
+      const text = renderShareText();
+      try {
+        await navigator.clipboard.writeText(text);
+        copiedMsg.textContent = "Copied results to clipboard.";
+      } catch (_) {
+        copiedMsg.textContent = "Clipboard blocked. Select text manually from browser console copy().";
+      }
+    });
+
+    clearBtn.addEventListener("click", () => {
+      const boxes = questionsEl.querySelectorAll("input[type=checkbox]");
+      boxes.forEach((box) => { box.checked = false; });
+      copiedMsg.textContent = "";
+      updateScore();
+    });
+
+    buildList();
+  </script>
+</body>
+</html>
